@@ -1,5 +1,4 @@
-class Tweet < ActiveRecord::Base
-  belongs_to :twitter_account
+class FacebookPost < ActiveRecord::Base
 
   def linked_body
     self.body.gsub(/@[0-9A-Za-z_]+/) do |capture|
