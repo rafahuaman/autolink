@@ -11,13 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216210149) do
+ActiveRecord::Schema.define(version: 20140216224330) do
 
   create_table "facebook_posts", force: true do |t|
     t.string   "body"
     t.string   "external_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "flickr_posts", force: true do |t|
+    t.string "caption"
   end
 
   create_table "tweets", force: true do |t|
