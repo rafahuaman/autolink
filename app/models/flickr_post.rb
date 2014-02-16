@@ -1,7 +1,5 @@
 class FlickrPost < ActiveRecord::Base
-  cattr_accessor :body_attribute
+  include AutoLink
 
-  self.body_attribute = :caption
-
-  include LinkedBody
+  auto_link :caption, :as => :body
 end

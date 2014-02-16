@@ -1,7 +1,5 @@
 class FacebookPost < ActiveRecord::Base
-  include LinkedBody
+  include AutoLink
 
-  cattr_accessor :body_attribute
-
-  self.body_attribute = :caption
+  auto_link :body
 end
