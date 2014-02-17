@@ -1,10 +1,6 @@
 class TwitterAccount < ActiveRecord::Base
   include TwitterClient
 
-  cattr_accessor :body_attribute
-
-  self.body_attribute = :caption
-
   has_many :tweets
   after_save :import_tweets
 
