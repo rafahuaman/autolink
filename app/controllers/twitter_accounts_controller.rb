@@ -10,7 +10,7 @@ class TwitterAccountsController < ApplicationController
   # GET /twitter_accounts/1
   # GET /twitter_accounts/1.json
   def show
-    @tweets = @twitter_account.tweets.limit(10)
+    @tweets = @twitter_account.tweets.order('external_id DESC').limit(10)
   end
 
   # GET /twitter_accounts/new
