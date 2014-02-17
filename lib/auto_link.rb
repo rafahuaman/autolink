@@ -1,6 +1,5 @@
 module AutoLink
-  HASHTAG_REGEX = /#[0-9A-Za-z_]+/
-  MENTION_REGEX = /@[0-9A-Za-z_]+/
+  REGEX_MAP = {:mentions => "@[0-9A-Za-z_]+", :hashtags => "#[0-9A-Za-z_]+"}
 
   def self.included(base)
     base.extend(ClassMethods)
@@ -9,22 +8,12 @@ module AutoLink
   module ClassMethods
     def auto_link(target, options={})
       define_method "linked_#{options[:as] || target}" do
-        result = self.send(target)
         matchers = Array(options[:on])
+        regex = Array(options[:on]).map { |matcher| REGEX_MAP[matcher] }.join('|')
 
-        if (matchers.include?(:mentions))
-          result.gsub!(MENTION_REGEX) do |capture|
-            "<a href='http://twitter.com/#{capture}'>#{capture}</a>"
-          end
+        self.send(target).gsub(/#{regex}/) do |capture|
+          "<a href='http://twitter.com/#{capture}'>#{capture}</a>"
         end
-
-        if (matchers.include?(:hashtags))
-          result.gsub!(HASHTAG_REGEX) do |capture|
-            "<a href='http://twitter.com/#{capture}'>#{capture}</a>"
-          end
-        end
-
-        result
       end
     end
   end
