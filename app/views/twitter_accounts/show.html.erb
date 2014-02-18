@@ -7,7 +7,7 @@
 
 <ul>
   <% @tweets.each do |tweet| %>
-    <li><%=@twitter_account.handle%>: <%=tweet.body%></li>
+    <li><%=@twitter_account.handle%>: <%=tweet.linked_body.html_safe%></li>
   <% end %>
 </ul>
 
